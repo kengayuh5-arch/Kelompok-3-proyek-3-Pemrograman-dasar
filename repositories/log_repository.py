@@ -19,7 +19,6 @@ class LogRepository:
 
         try:
             with conn.cursor() as cur:
-                # Format waktu dari objek datetime Python ke string SQL (YYYY-MM-DD HH:MM:SS)
                 waktu_str = log.waktu.strftime("%Y-%m-%d %H:%M:%S")
                 cur.execute(
                     "INSERT INTO log_aktivitas (waktu, pesan) VALUES (%s, %s)",
@@ -40,13 +39,10 @@ class LogRepository:
         conn = self.database.connect()
         try:
             with conn.cursor() as cur:
-                # Mengambil data terbaru (DESC), lalu batasi jumlahnya (LIMIT)
                 cur.execute("SELECT * FROM log_aktivitas ORDER BY id_log DESC LIMIT %s", (batas,))
                 rows = cur.fetchall()
 
                 
-                # Karena DESC, urutannya terbalik (terbaru di atas). 
-                # Kita balikkan (reverse) agar tampilannya sama seperti di teks file (terlama di atas)
                 hasil = [self._row_to_obj(row) for row in rows]
                 hasil.reverse() 
                 return hasil

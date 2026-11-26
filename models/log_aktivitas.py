@@ -5,7 +5,7 @@ class LogAktivitas:
         if not pesan or type(pesan) != str:
             raise ValueError("Pesan log tidak boleh kosong!")
         
-        self.id_log = id_log # <-- BARU
+        self.id_log = id_log 
         self.pesan = pesan
         self.waktu = waktu if waktu else datetime.now()
 

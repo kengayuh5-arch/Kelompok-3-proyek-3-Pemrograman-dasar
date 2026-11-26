@@ -4,7 +4,7 @@ class MahasiswaRepository:
     def __init__(self, database):
         self.database = database
 
-    # Fungsi bantuan untuk mengubah Dictionary dari database menjadi Objek Mahasiswa
+
     def _row_to_obj(self, row):
         if not row: return None
         return Mahasiswa(
@@ -38,7 +38,6 @@ class MahasiswaRepository:
             with conn.cursor() as cur:
                 cur.execute("SELECT * FROM mahasiswa ORDER BY id_mahasiswa")
                 rows = cur.fetchall()
-                # Ubah setiap baris dict menjadi objek Mahasiswa
                 return [self._row_to_obj(row) for row in rows]
         finally:
             conn.close()
@@ -83,7 +82,6 @@ class MahasiswaRepository:
         conn = self.database.connect()
         try:
             with conn.cursor() as cur:
-                # Mencari berdasarkan NIM atau Nama (menggunakan LIKE)
                 search_query = f"%{keyword}%"
                 cur.execute(
                     "SELECT * FROM mahasiswa WHERE nim LIKE %s OR nama LIKE %s ORDER BY id_mahasiswa",
