@@ -1,4 +1,4 @@
-from database import Database # <-- Tambahkan ini
+from database import Database
 from services.sistem_lab import SistemLab
 from reports.laporan import Laporan
 from ui.menu_app import MenuApp
